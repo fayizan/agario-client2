@@ -14,4 +14,11 @@ client.on('newBall', (data) => {
   console.log('New ball appears');
 });
 
-client.connect(server.getFfaServer());
+server.getFFAServer({}, (resp) => {
+  if (resp.error) {
+    return console.log('Error while getting FFA server:', resp.error);
+  }
+  console.log('Connecting to:', resp.server);
+
+  client.connect('ws://' + resp.server);
+});
