@@ -26,7 +26,7 @@ class Client extends EventEmitter {
       },
       32: (data) => {
         logger.debug('Packet 32: New ball appears');
-        this.emit('newBall');
+        this.emit('newBall', data);
       },
       49: (data) => {
         //logger.debug('Leaderboard:', data);
