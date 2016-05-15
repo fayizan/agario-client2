@@ -1,4 +1,4 @@
-use strict';
+'use strict';
 
 const WebSocket = require('ws');
 const EventEmitter = require('events').EventEmitter;

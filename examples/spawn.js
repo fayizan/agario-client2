@@ -1,6 +1,6 @@
 'use strict';
 
-const AgarClient = require('../');
+const AgarClient = require('../src');
 const Client = AgarClient.Client;
 const server = AgarClient.server;
 const client = new Client('name');

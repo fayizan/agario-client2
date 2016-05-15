@@ -9,7 +9,7 @@ let ready = q.defer();
 let promises = {};
 
 function downloadCoreScript(callback) {
-  let dest = './agario.core.js';
+  let dest = __dirname + '/agario.core.js';
   let file = fs.createWriteStream(dest);
 
   http.get('http://agar.io/agario.core.js', function(resp) {
