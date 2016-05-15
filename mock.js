@@ -40,8 +40,6 @@ const document = {
 };
 
 function WebSocket(url, protocols) {
-  console.log('Listen:', url);
-
   this.readyState = 1;
   window.ws = this;
 };
