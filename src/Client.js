@@ -4,7 +4,7 @@ const WebSocket = require('ws');
 const EventEmitter = require('events').EventEmitter;
 
 const logger = require('./logger');
-const core = require('./core')('ws://139.162.45.173:1500');
+const core = require('./core')('ws://fakeserver');
 
 class Client extends EventEmitter {
 
