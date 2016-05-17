@@ -54,7 +54,10 @@ In this list `on.eventName(param1, param2)` means you need to do
 - `on.connected()`: connected to server and ready to spawn
 - `on.newBall(data: Buffer)`: new ball appears, sent when respawned or split (manually or by hitting a virus)
 - `on.reset()`: reset all balls, sent when start a new game
-- `on.leaderBoard(data: Buffer)`: leaderboard information
+- `on.leaderBoard(data: Array)`: Leader board information, each item of the
+array is an array like `[highlight, nickname]`, `highlight` is a number
+with value 0 or 1 where 1 means `nickname` should be highlighted in leader
+board (for example your nickname)
 - `on.worldUpdate(data: Buffer)`: world update, contains all information needed to draw the visible cells
 
 ## server
