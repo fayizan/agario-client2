@@ -52,10 +52,10 @@ In this list `on.eventName(param1, param2)` means you need to do
 `client.on('eventName', function(param1, param2) { ... })`
 
 - `on.connected()`: connected to server and ready to spawn
-- `on.newBall(data: Uint8Array)`: new ball appears, sent when respawned or split (manually or by hitting a virus)
+- `on.newBall(data: Buffer)`: new ball appears, sent when respawned or split (manually or by hitting a virus)
 - `on.reset()`: reset all balls, sent when start a new game
-- `on.leaderBoard(data: Uint8Array)`: leaderboard information
-- `on.worldUpdate(data: Uint8Array)`: world update, contains all information needed to draw the visible cells
+- `on.leaderBoard(data: Buffer)`: leaderboard information
+- `on.worldUpdate(data: Buffer)`: world update, contains all information needed to draw the visible cells
 
 ## server
 

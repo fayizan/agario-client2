@@ -87,13 +87,14 @@ class Client extends EventEmitter {
   }
 
   _onMessage(event) {
-    let msg = new Uint8Array(event.data);
-    let handler = this.packetHandlers[msg[0]];
+    let data = event.data;
+    let opcode = data.readUInt8(0);
+    let handler = this.packetHandlers[opcode];
 
     if (handler) {
-      handler(msg);
+      handler(data);
     } else {
-      logger.warn('Unhanded packet type:', msg);
+      logger.warn('Unhanded packet type:', data);
     }
   }
 
