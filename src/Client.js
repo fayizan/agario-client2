@@ -5,6 +5,8 @@ const EventEmitter = require('events').EventEmitter;
 
 const logger = require('./logger');
 const core = require('./core')('ws://fakeserver');
+const PacketDecoder = require('./PacketDecoder');
+const packetDecoder = new PacketDecoder();
 
 class Client extends EventEmitter {
 
@@ -29,8 +31,7 @@ class Client extends EventEmitter {
         this.emit('newBall', data);
       },
       49: (data) => {
-        //logger.debug('Leaderboard:', data);
-        this.emit('leaderBoard', data);
+        this.emit('leaderBoard', this._decode(data));
       },
       112: (data) => {
         logger.debug('Packet112: Server is ready or ask for sth?');
@@ -128,6 +129,10 @@ class Client extends EventEmitter {
       this._send(packet113);
       this.emit('connected');
     });
+  }
+
+  _decode(data) {
+    return packetDecoder.decode(data);
   }
 
 }
