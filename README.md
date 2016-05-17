@@ -42,7 +42,7 @@ server.getFFAServer({}, (resp) => {
 
 ### Client methods
 
-- `client.connect(server)`: connect to Agar server
+- `client.connect(server)`: connect to Agar server, connect to the same `ws://ip:port` to join the same room
 - `client.disconnect()`: disconnect from Agar server
 - `client.spawn(nickName)`: spawn a ball
 
