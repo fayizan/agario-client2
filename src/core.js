@@ -3,7 +3,9 @@
 const http = require('http');
 const fs = require('fs');
 const q = require('q');
+
 const WebSocket = require('./mock').WebSocket;
+const logger = require('./logger');
 
 let ready = q.defer();
 let promises = {};
@@ -12,7 +14,7 @@ function downloadCoreScript(callback) {
   let dest = __dirname + '/agario.core.js';
   let file = fs.createWriteStream(dest);
 
-  http.get('http://agar.io/agario.core.js', function(resp) {
+  http.get('http://agar.io/agario.core.js?' + Math.floor(new Date/1E3/60), function(resp) {
     resp.pipe(file);
 
     file.on('finish', function() {
@@ -64,16 +66,21 @@ function getAuthData(packet112) {
   });
 }
 
-// always download latest version of the core
-downloadCoreScript(function() {
-  const agarCore = require('./agario.core.js');
-});
 
 module.exports = function(url) {
-  setTimeout(function() {
-    window.core.connect(url);
-    ready.resolve();
-  }, 5000);
+  // always download latest version of the core
+  downloadCoreScript(function(err) {
+    if (err) {
+      return logger.error('Error while downloading agario.core.js', err);
+    }
+
+    require('./agario.core.js');
+
+    setTimeout(function() {
+      window.core.connect(url);
+      ready.resolve();
+    }, 3000);
+  });
 
   return {
     getInitData: getInitData,
