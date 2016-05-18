@@ -34,11 +34,12 @@ class Client extends EventEmitter {
         this.emit('leaderBoard', this._decode(data));
       },
       112: (data) => {
-        logger.debug('Packet112: Server is ready or ask for sth?');
+        logger.debug('Packet 112: Post auth');
         this._postAuth(data);
       },
-      128: function() {
-        logger.debug('Server asks for reload client, client is outdated?');
+      128: () => {
+        logger.debug('Packet 128: Socket closed, client is outdated?');
+        this.disconnect();
       },
       241: function(data) {
         logger.debug('Connected to room:', data);
@@ -100,11 +101,12 @@ class Client extends EventEmitter {
   }
 
   _onClose() {
-    logger.debug('Socket Closed');
+    logger.info('Socket Closed');
+    this.emit('disconnected');
   }
 
   _onError() {
-    logger.debug('Socket error');
+    logger.warn('Socket error');
   }
 
   _send(data) {
